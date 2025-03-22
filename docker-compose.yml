@@ -30,7 +30,7 @@ services:
     working_dir: /app
     command: ["dotnet", "UrlShortener.dll"]
 
-  migrator:
+  urlshortener-migrator:
     image: mcr.microsoft.com/dotnet/sdk:8.0
     container_name: urlshortener-migrator
     depends_on:
