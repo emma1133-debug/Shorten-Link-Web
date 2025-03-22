@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: urlshortener-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret123
+      POSTGRES_DB: urlshortenerdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres-data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: urlshortener-backend
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5050:5050"
+    working_dir: /app
+    command: ["dotnet", "UrlShortener.dll"]
+
+  migrator:
+    image: mcr.microsoft.com/dotnet/sdk:8.0
+    container_name: urlshortener-migrator
+    depends_on:
+      - postgres
+    working_dir: /src
+    volumes:
+      - .:/src
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        dotnet tool install --global dotnet-ef --version 9.0.3
+        export PATH="$PATH:/root/.dotnet/tools"
+        dotnet ef database update --project UrlShortener.csproj --startup-project .
+
+volumes:
+  postgres-data:

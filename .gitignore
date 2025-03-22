@@ -1,0 +1,37 @@
+# === BACKEND (.NET) ===
+bin/
+obj/
+out/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.log
+*.vs/
+*.db
+*.db-shm
+*.db-wal
+
+# Rider / JetBrains IDE
+.idea/
+
+# User-specific files
+*.DotSettings.user
+
+# Logs
+*.log
+
+# === FRONTEND (Vite / Node.js) ===
+node_modules/
+dist/
+.vite/
+.cache/
+*.env
+.env.*
+
+# macOS & System files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
