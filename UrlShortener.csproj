@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <PreserveCompilationContext>true</PreserveCompilationContext> <!-- Giúp ASP.NET Core dùng đúng metadata -->
+    <PreserveCompilationContext>true</PreserveCompilationContext> 
   </PropertyGroup>
 
   <ItemGroup>

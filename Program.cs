@@ -37,12 +37,10 @@ builder.Services.AddDbContext<UrlDbContext>(options =>
     options.UseNpgsql(connectionString));
 
 // 👉 Dùng EF với PostgreSQL
-builder.Services.AddScoped<IUrlStorage, PostgresUrlStorage>(); // ✅ Đảm bảo file này tồn tại!
-builder.Services.AddScoped<UrlShortenerService>();
+builder.Services.AddScoped<IUrlStorage, PostgresUrlStorage>();
 
 var app = builder.Build();
 
-// 👉 Middleware
 app.UseCors("AllowReactApp");
 
 if (app.Environment.IsDevelopment())
